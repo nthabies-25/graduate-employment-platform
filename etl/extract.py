@@ -1,9 +1,19 @@
 import pandas as pd
+import os 
 
-df = pd.read_csv("data/graduate_survey.csv")
+def extract():
+    path = os.path.join("data", "graduate_survey")
 
-print(df.head())
-print()
-print(df.info())
-print()
-print(df.describe())
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Data file not found at {path}. Run generate_data.py first.")
+
+
+    df = pd.read_csv(path)
+
+    
+    print(f"Extracted {len(df)} records from {path}")
+    print(df.info())
+
+    return df
+if __name__ == "__main__":
+    extract()
