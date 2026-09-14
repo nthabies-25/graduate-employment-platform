@@ -36,24 +36,25 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
     #Validate categorical values
     
     valid_genders = {"Male", "Female"}
-    invalid_gender = ~df["gender"].isin(valid_genders)
-    if invalid_gender.any():
-        print(f"Dropping {invalid_gender.sum()} record/s with invalid gender")
-        df = df[~invalid_gender]
+    invalid_gender_mask = ~df["gender"].isin(valid_genders)
+    if invalid_gender_mask.any():
+        print(f"Dropping {invalid_gender_mask.sum()} record/s with invalid gender")
+        df = df[~invalid_gender_mask]
         
         #Drop years with an impossible age and graduation year
-        df =df[(df["age"] >= 18 & (df["age"] <= 65))]
-        df = df[df["graduation_year"].between(2000,2100)]
+    df =df[(df["age"] >= 18) & (df["age"] <= 65)]
+    df = df[df["graduation_year"].between(2000,2100)]
         
         #Derived fields
-        df["employemnt_status"] =df["employed"].map({True: "Employed", False: "Unemployed"})
+    df["employment_status"] =df["employed"].map({True: "Employed", False: "Unemployed"})
         
-        current_year = pd.Timestamp.now().year
-        df["years_since_graduation"] = current_year - df["graduation_year"]
-        print(f"Transformed dataset: {len(df)} clean records")
-        print(df["employement_status"].value_counts())
+    current_year = pd.Timestamp.now().year
+    df["years_since_graduation"] = current_year - df["graduation_year"]
+    
+    print(f"Transformed dataset: {len(df)} clean records")
+    print(df["employment_status"].value_counts())
         
-        return df
+    return df
     
 
 if __name__ == "__main__":
