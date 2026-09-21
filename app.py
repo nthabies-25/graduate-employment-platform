@@ -286,3 +286,4 @@ with tab_companies:
 with tab_data:
     st.subheader(f"Filtered Records ({total:,})")
     st.dataframe(filtered, width='stretch', hide_index=True)
+    
