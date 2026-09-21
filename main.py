@@ -1,5 +1,14 @@
+"""
+Pipeline entry point.
+
+Run with:  python main.py
+Runs Extract -> Transform -> Load in sequence and reports the outcome
+of each stage.
+"""
+
 import sys
 import os
+
 from extract import extract
 from transform import transform
 from load import load
