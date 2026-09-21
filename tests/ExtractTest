@@ -5,7 +5,7 @@ import extract as extract_module
 from extract import extract
 
 
-class TestExtract(unittest.TestCase):
+class ExtractTest(unittest.TestCase):
 
     def test_extract_returns_dataframe_with_expected_columns(self):
         df = extract()
