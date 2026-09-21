@@ -38,7 +38,7 @@ df = load_data()
 st.title("🎓 Graduate Employment Analytics")
 st.caption("ETL pipeline output — extracted, cleaned, and loaded into SQLite")
 
-# --- Sidebar filters
+# --- Sidebar filters -------------------------------------------------------
 st.sidebar.header("Filters")
 degrees = st.sidebar.multiselect(
     "Degree", options=sorted(df["degree"].unique()), default=None
@@ -53,7 +53,7 @@ if degrees:
 if years:
     filtered = filtered[filtered["graduation_year"].isin(years)]
 
-# --- Top-line metrics 
+# --- Top-line metrics --------------------------------------------------------
 total = len(filtered)
 employed = int(filtered["employed"].sum())
 rate = (employed / total * 100) if total else 0
@@ -113,4 +113,3 @@ st.dataframe(top_companies, use_container_width=True, hide_index=True)
 
 with st.expander("View raw data"):
     st.dataframe(filtered, use_container_width=True)
-

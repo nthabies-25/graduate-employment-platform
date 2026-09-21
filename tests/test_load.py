@@ -27,7 +27,7 @@ def make_clean_df():
     })
 
 
-class LoadTest(unittest.TestCase):
+class TestLoad(unittest.TestCase):
 
     def setUp(self):
         self.tmp_dir = tempfile.TemporaryDirectory()

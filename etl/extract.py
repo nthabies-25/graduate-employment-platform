@@ -1,8 +1,10 @@
 import pandas as pd
-import os 
+import os
 
-
+# Project root = one level up from this file (etl/), so this works
+# whether you run `python etl/extract.py` or `python extract.py` from etl/.
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 def extract():
     path = os.path.join(PROJECT_ROOT, "data", "graduate_survey.csv")

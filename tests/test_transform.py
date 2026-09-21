@@ -25,7 +25,7 @@ def make_df(**overrides):
     return pd.DataFrame(base)
 
 
-class TransformTest(unittest.TestCase):
+class TestTransform(unittest.TestCase):
 
     def test_removes_duplicate_graduate_ids(self):
         df = make_df()
