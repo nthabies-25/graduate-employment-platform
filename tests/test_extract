@@ -1,0 +1,31 @@
+import unittest
+from unittest import mock
+
+import extract as extract_module
+from extract import extract
+
+
+class TestExtract(unittest.TestCase):
+
+    def test_extract_returns_dataframe_with_expected_columns(self):
+        df = extract()
+
+        expected_columns = {
+            "graduate_id", "name", "age", "gender", "degree",
+            "graduation_year", "employed", "company", "salary",
+            "months_to_employment", "skill",
+        }
+        self.assertTrue(expected_columns.issubset(set(df.columns)))
+        self.assertGreater(len(df), 0)
+
+    def test_extract_raises_when_source_file_missing(self):
+        # Point PROJECT_ROOT somewhere with no data/ folder, so extract()
+        # can't find graduate_survey.csv and must raise clearly rather
+        # than failing with a confusing pandas error.
+        with mock.patch.object(extract_module, "PROJECT_ROOT", "/nonexistent/testing/path"):
+            with self.assertRaises(FileNotFoundError):
+                extract_module.extract()
+
+
+if __name__ == "__main__":
+    unittest.main()
